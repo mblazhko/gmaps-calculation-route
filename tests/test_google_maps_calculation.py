@@ -1,3 +1,5 @@
+from pprint import pprint
+
 from app import GetBestRouteHelper
 import json
 import pytest
@@ -26,26 +28,18 @@ def run_and_save_to_json(request):
 
 def test_route_calculation(run_and_save_to_json):
     input_list = [
-        ("Paris, France", "Milano, Italy"),
-        ("Freiburg, Germany", "Milano, Italy"),
-        ("Paris, France", "Bratislava, Slovakia"),
-        ("Helsinki, Finland", "Ljubljana, Slovenia"),
-        ("Madrid, Spain", "Vilnius, Lithuania"),
-        ("Rome, Italy", "Helsinki, Finland"),
-        ("Berlin, Germany", "Lisbon, Portugal"),
-        ("Prague, Czech Republic", "Lisbon, Portugal"),
-        ("Warsaw, Poland", "Marseille, France"),
-        ("Athens, Greece", "Brussel, Belgium"),
-        ("Milano, Italy", "Berlin, Germany"),
-        ("Dijon, France", "Vienna, Austria"),
-        ("Lion, France", "Prague, Czech Republic"),
-        ("Bratislava, Slovakia", "Valencia, Spain"),
-        ("Ljubljana, Slovenia", "Paris, France"),
-        ("Madrid, Spain", "Copenhagen, Denmark"),
-        ("Budapest, Hungary", "Paris, France"),
-        ("Madrid, Spain", "Freiburg, Germany"),
-        ("Oslo, Norway", "Barcelona, Spain"),
-        ("Stockholm, Sweden", "Lyon, France"),
+        ("Kotka, Finland", "Torino, Italy"),
+        ("Dijon, France", "Plovdiv, Bulgaria"),
+        ("Freiburg, Germany", "Torino, Italy"),
+        ("Singen, Germany", "Torino, Italy"),
+        ("Singen, Germany", "Annecy, France"),
+        ("Novara, Italy", "Besancon, France"),
+        ("Chamber, France", "Innsbruck, Austria"),
+        ("Sarajevo,  Bosnia and Herzegovina", "Besancon, France"),
+        ("Munich,  Germany", "Marseille, France"),
+        ("Tallinn,  Estonia", "Lisbon, Portugal"),
+        ("Amsterdam,  Netherlands", "Milano, Italy"),
+        ("Malaga,  Spain", "Saariselka, Finland"),
     ]
 
     run_and_save_to_json(input_list)

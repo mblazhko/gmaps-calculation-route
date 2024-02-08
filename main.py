@@ -13,6 +13,6 @@ def main(origin, destination, waypoints):
 
 if __name__ == "__main__":
     best = main(
-        origin="Madrid, Spain", destination="Vilnius, Lithuania", waypoints=None
+        origin="Sarajevo,  Bosnia and Herzegovina", destination="Besançon, France", waypoints=None
     )
     pprint(best)

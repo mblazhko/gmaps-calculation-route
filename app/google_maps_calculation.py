@@ -8,6 +8,7 @@ from config import GOOGLE_MAPS_API_KEY
 class GetBestRouteHelper:
     INNSBRUCK = ["via:Innsbruck, Austria"]
     LION = ["via:Lion, France"]
+    BEAUNE = ["via:Beaune, France"]
     TOTAL_REQUESTS = 0
 
     def __init__(
@@ -46,14 +47,18 @@ class GetBestRouteHelper:
                 "duration": route_info["duration"]["text"],
                 "start_address": route_info["start_address"],
                 "end_address": route_info["end_address"],
-                "polyline": best_route["overview_polyline"]["points"]
+                "polyline": best_route["overview_polyline"]["points"],
             }
             return result
         else:
             return self.find_best_route(
                 origin=origin,
                 destination=destination,
-                waypoints=GetBestRouteHelper.INNSBRUCK,
+                waypoints=(
+                    GetBestRouteHelper.BEAUNE
+                    if "France" in destination or "France" in origin
+                    else GetBestRouteHelper.INNSBRUCK
+                ),
             )
 
     def _get_routes(
