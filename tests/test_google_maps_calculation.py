@@ -17,7 +17,7 @@ def run_and_save_to_json(request):
             local_results.append(result)
 
         # Save results to a local JSON file
-        json_path = "results.json"
+        json_path = "google_results.json"
         with open(json_path, "a") as json_file:
             json.dump(local_results, json_file, indent=2)
 
