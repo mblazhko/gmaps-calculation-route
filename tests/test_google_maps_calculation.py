@@ -35,11 +35,11 @@ def test_route_calculation(run_and_save_to_json):
         ("Singen, Germany", "Annecy, France"),
         ("Novara, Italy", "Besancon, France"),
         ("Chamber, France", "Innsbruck, Austria"),
-        ("Sarajevo,  Bosnia and Herzegovina", "Besancon, France"),
-        ("Munich,  Germany", "Marseille, France"),
-        ("Tallinn,  Estonia", "Lisbon, Portugal"),
-        ("Amsterdam,  Netherlands", "Milano, Italy"),
-        ("Malaga,  Spain", "Saariselka, Finland"),
+        ("Sarajevo, Bosnia and Herzegovina", "Besancon, France"),
+        ("Munich, Germany", "Marseille, France"),
+        ("Tallinn, Estonia", "Lisbon, Portugal"),
+        ("Amsterdam, Netherlands", "Milano, Italy"),
+        ("Malaga, Spain", "Saariselka, Finland"),
     ]
 
     run_and_save_to_json(input_list)

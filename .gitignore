@@ -4,6 +4,8 @@
 .idea/**/dictionaries
 .idea/**/shelf
 .env
+*.html
+*.json
 .idea/**/aws.xml
 .idea/**/contentModel.xml
 .idea/**/dataSources/

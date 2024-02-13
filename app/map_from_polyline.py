@@ -7,25 +7,43 @@ import folium
 
 
 class MapCreator:
-    FLEX = "flex",
-    SIMPLE = "simple"
+    def create_map_from_polyline(self, polyline_type: str):
+        if polyline_type == "google":
+            self._simple_threads()
+        elif polyline_type == "here":
+            self._flex_threads()
 
-    def create_map_from_polyline(self, polylines, polyline_type: str):
-        if polyline_type == "simple":
-            with ThreadPoolExecutor() as executor:
-                executor.map(self._make_map_from_google, polylines)
-        else:
-            with ThreadPoolExecutor() as executor:
-                executor.map(self._create_map_from_flex_polyline, polylines)
+    def _simple_threads(self):
+        with open(
+                os.path.join("..", "tests", "google_results.json"), "r"
+        ) as google:
+            gmaps_polylines = json.load(google)
+        with ThreadPoolExecutor() as executor:
+            executor.map(
+                self._make_map_from_google,
+                gmaps_polylines
+            )
+
+    def _flex_threads(self):
+        with open(
+                os.path.join("..", "tests", "here_results.json"), "r"
+        ) as here:
+            here_maps_polylines = json.load(here)
+        with ThreadPoolExecutor() as executor:
+            executor.map(
+                self._create_map_from_flex_polyline,
+                here_maps_polylines
+            )
 
     @staticmethod
     def _create_map_from_flex_polyline(route: dict):
-        poly = route["polyline"]
-        decoded_polyline = fp.decode(poly)
-        map_route = folium.Map(
-            location=[decoded_polyline[0][0], decoded_polyline[0][1]], zoom_start=20
-        )
-        folium.PolyLine(locations=decoded_polyline, color="blue").add_to(map_route)
+        map_route = folium.Map()
+        for poly in route["polylines"]:
+            decoded_polyline = fp.decode(poly)
+            folium.PolyLine(
+                locations=decoded_polyline, color="blue"
+            ).add_to(map_route)
+
         file_name = f"{route["start_address"]}-{route["end_address"]}.html"
         save_path = os.path.join("..", "maps", "here", file_name)
         map_route.save(save_path)
@@ -55,10 +73,4 @@ class MapCreator:
 
 if __name__ == "__main__":
     map_creator = MapCreator()
-    # with open(os.path.join("..", "tests", "google_results.json"), "r") as f:
-    #     results = json.load(f)
-    # create_map_from_polyline(results)
-
-    with open(os.path.join("..", "tests", "here_results.json"), "r") as f:
-        results = json.load(f)
-    map_creator.create_map_from_polyline(results, "flex")
+    map_creator.create_map_from_polyline("here")
